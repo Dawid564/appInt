@@ -16,7 +16,7 @@ public class BookManager {
     public List<Book> searchByTitle(String title) {
         return books//
                 .stream()//
-                .filter(b -> b.getTitle().equalsIgnoreCase(title))//
+                .filter(b -> b.getTitle().contains(title))//
                 .collect(Collectors.toList());
     }
 

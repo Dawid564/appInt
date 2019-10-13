@@ -18,4 +18,9 @@ public class BookController {
         bookService.getBooks();
         return "test";
     }
+
+    @RequestMapping("/saveBook")
+    public void saveBook(){
+        bookService.saveBooks();
+    }
 }
