@@ -21,7 +21,7 @@ public class BookService {
     private static final String XML_BOOK_PATH = "xml/books.2.xml";
     private static final String XML_NEW_XML_FILE = "result.xml";
 
-    public BookList getBooks() {
+    private BookList getBooks() {
         BookList bookList = null;
         try {
             File file = ResourceUtils.getFile("classpath:" + XML_BOOK_PATH);
@@ -38,22 +38,22 @@ public class BookService {
         return bookList;
     }
 
-    private BookList collectBooksList() {
-        Book book = new Book("99999", "Java", "java", "123456789", 2000, "java", 123);
+    private BookList collectBooksList(Book book) {
+        //Book book = new Book("99999", "Java", "java", "123456789", 2000, "java", 123);
         BookManager bookManager = new BookManager(getBooks().getBooks());
         List<Book> listOfBooks = bookManager.searchByTitle("Java");
         listOfBooks.add(book);
         return new BookList(listOfBooks);
     }
 
-    public BookList saveBooks() {
-        BookList bookList = collectBooksList();
+    public BookList saveBooks(Book book) {
+        BookList bookList = collectBooksList(book);
         return createFileWithBooks(bookList);
     }
 
     private BookList createFileWithBooks(BookList bookList) {
 
-        try{
+        try {
             JAXBContext jaxbContext = JAXBContext.newInstance(BookList.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
@@ -65,10 +65,25 @@ public class BookService {
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.printf(sw.toString(), 1000);
             printWriter.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return bookList;
+    }
+
+    public List<Book> searchByTitle(String tittle) {
+        BookManager bookManager = new BookManager(getBooks().getBooks());
+        return bookManager.searchByTitle(tittle);
+    }
+
+    public List<Book> searchByAuthor(String author) {
+        BookManager bookManager = new BookManager(getBooks().getBooks());
+        return bookManager.searchByAuthor(author);
+    }
+
+    public Book searchByISBN(String isbn) {
+        BookManager bookManager = new BookManager(getBooks().getBooks());
+        return bookManager.searchByISBN(isbn);
     }
 }
