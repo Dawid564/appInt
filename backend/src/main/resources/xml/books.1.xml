@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books xmlns="http://wi.zut.edu.pl/ia/books"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://wi.zut.edu.pl/ia/books books.xsd">
+    <book id="TIXML">
+        <title>Tablice informatyczne. XML</title>
+        <authors>
+            <author>Krzysztof Kozłowski</author>
+            <author>Sławomir Zimosz</author>
+        </authors>
+        <isbn>83-246-0590-8</isbn>
+        <publisher>
+            <id>123</id>
+            <url>www.lubieplacki.pl</url>
+            <name>imie</name>
+        </publisher>
+        <year>2007</year>
+        <keywords>klucz</keywords>
+        <pages>123</pages>
+    </book>
+    <book id="CWJAV3">
+        <title>Java. Ćwiczenia praktyczne. Wydanie III</title>
+        <authors>
+            <author>Marcin Lis</author>
+        </authors>
+        <isbn>978-83-246-2785-1</isbn>
+        <publisher>
+            <id>123</id>
+            <url>www.lubieplacki.pl</url>
+            <name>imie</name>
+        </publisher>
+        <year>2011</year>
+        <keywords>klucz</keywords>
+        <pages>123</pages>
+    </book>
+    <book id="JAPPAN">
+        <title>Java. Przygotowanie do programowania na platformę Android</title>
+        <authors>
+            <author>Jeff Friesen</author>
+        </authors>
+        <isbn>978-83-246-3372-2</isbn>
+        <publisher>
+            <id>123</id>
+            <url>www.lubieplacki.pl</url>
+            <name>imie</name>
+        </publisher>
+        <year>2011</year>
+        <keywords>klucz</keywords>
+        <pages>123</pages>
+    </book>
+</books>
