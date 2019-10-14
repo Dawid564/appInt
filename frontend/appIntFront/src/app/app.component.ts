@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Book} from "./app/dto/book";
-import {Observable} from "rxjs";
-import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
 
 @Component({
   selector: 'app-root',
@@ -10,29 +8,44 @@ import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private title = 'appIntFront';
-  private logo = "exmaple logo";
   private book: Book;
+  public books: Book[];
+  public head = 'yolo';
+  public tableHead = [
+    'id',
+    'title',
+    'author',
+    'isbn',
+    'year',
+    'publisher',
+    'pages'
+  ];
 
-  constructor(private httpClient: HttpClient) { }
-
-
-  ngOnInit() {
-    console.log("test123")
+  constructor(private httpClient: HttpClient) {
   }
 
 
-  public getTestData(){
-    this.httpClient.get("http://localhost:8080/api/book/oneBook").subscribe((data: any[])=>{
+  ngOnInit() {
+
+  }
+
+
+  public getTestData() {
+    this.httpClient.get("http://localhost:8080/api/book/oneBook").subscribe((data: any[]) => {
       console.log(data)
     });
   }
 
-  public getTestBook(){
-    this.httpClient.get<Book>("http://localhost:8080/api/book/oneBook").subscribe((data: Book)=>{
+  public getTestBook() {
+    this.httpClient.get<Book>("http://localhost:8080/api/book/oneBook").subscribe((data: Book) => {
       this.book = data;
     });
     console.log(this.book.id);
   }
 
+  public getAllBooks() {
+    this.httpClient.get<Book[]>("http://localhost:8080/api/book/allBooks").subscribe((d) => {
+      this.books = d;
+    });
+  }
 }

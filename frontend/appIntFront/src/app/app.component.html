@@ -1,3 +1,27 @@
-<button (click)="getTestData()">test connection</button>
+<!--<button (click)="getTestData()">test connection</button>-->
 
-<button (click)= "getTestBook()">get dto book</button>
+<!--<button (click)= "getTestBook()">get dto book</button>-->
+<div>
+  <b>Control panel</b>
+  <div><button (click)= "getAllBooks()">get all books</button></div>
+</div>
+
+
+<table mdbTable>
+  <thead>
+  <tr>
+    <th *ngFor="let head of tableHead" scope="col">{{head}} </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr mdbTableCol *ngFor="let b of books">
+    <th scope="row">{{b.id}}</th>
+    <td>{{b.title}}</td>
+    <td>{{b.author}}</td>
+    <td>{{b.isbn}}</td>
+    <td>{{b.year}}</td>
+    <td>{{b.publisher}}</td>
+    <td>{{b.pages}}</td>
+  </tr>
+  </tbody>
+</table>

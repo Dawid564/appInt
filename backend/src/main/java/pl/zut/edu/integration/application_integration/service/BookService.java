@@ -29,9 +29,7 @@ public class BookService {
 
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
             bookList = (BookList) jaxbUnmarshaller.unmarshal(file);
-            System.out.println(bookList.getBooks().size());
-
-
+            System.out.println("");
         } catch (Exception e) {
             e.printStackTrace();
         }
