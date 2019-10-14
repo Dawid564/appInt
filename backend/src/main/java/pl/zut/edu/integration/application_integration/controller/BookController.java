@@ -16,6 +16,21 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+    @GetMapping("/allBooks")
+    public List<Book> getAllBooks(){
+        return bookService.getBooks().getBooks();
+    }
+
+    @GetMapping("/oneBook")
+    public Book getOneBooks(){
+        return bookService.getBooks().getBooks().get(0);
+    }
+
+    @GetMapping("/test")
+    public String takeTest(){
+        return "test";
+    }
+
     @GetMapping("/saveBook")
     public void saveBook(Book book){
         bookService.saveBooks(book);

@@ -21,7 +21,7 @@ public class BookService {
     private static final String XML_BOOK_PATH = "xml/books.2.xml";
     private static final String XML_NEW_XML_FILE = "result.xml";
 
-    private BookList getBooks() {
+    public BookList getBooks() {
         BookList bookList = null;
         try {
             File file = ResourceUtils.getFile("classpath:" + XML_BOOK_PATH);

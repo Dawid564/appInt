@@ -21,4 +21,5 @@ public class BookList {
 
     @XmlElement(name = "book")
     private List<Book> books;
+
 }
