@@ -12,7 +12,7 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    BookService bookService;
+    private BookService bookService;
 
     @GetMapping("/allBooks")
     public List<Book> getAllBooks(){
@@ -26,7 +26,7 @@ public class BookController {
 
     @PostMapping("/saveBook")
     public void saveBook(@RequestBody Book book){
-        bookService.saveBooks(book);
+        bookService.addBookToMemoryStorage(book);
     }
 
     @GetMapping("/searchByTitle/{tittle}")

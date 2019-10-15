@@ -1,15 +1,14 @@
 package pl.zut.edu.integration.application_integration.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+import pl.zut.edu.integration.application_integration.configuration.DataSourceConfiguration;
 import pl.zut.edu.integration.application_integration.dto.Book;
 import pl.zut.edu.integration.application_integration.dto.BookList;
 import pl.zut.edu.integration.application_integration.factories.BookManager;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -18,22 +17,13 @@ import java.util.List;
 @Service
 public class BookService {
 
-    private static final String XML_BOOK_PATH = "xml/books.2.xml";
+    @Autowired
+    private DataSourceConfiguration dataSourceConfiguration;
+
     private static final String XML_NEW_XML_FILE = "result.xml";
 
     public BookList getBooks() {
-        BookList bookList = null;
-        try {
-            File file = ResourceUtils.getFile("classpath:" + XML_BOOK_PATH);
-            JAXBContext jaxbContext = JAXBContext.newInstance(BookList.class);
-
-            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            bookList = (BookList) jaxbUnmarshaller.unmarshal(file);
-            System.out.println("");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bookList;
+        return dataSourceConfiguration.getBookManager();
     }
 
     private BookList collectBooksList(Book book) {
@@ -47,6 +37,13 @@ public class BookService {
     public BookList saveBooks(Book book) {
         BookList bookList = collectBooksList(book);
         return createFileWithBooks(bookList);
+    }
+
+    public Book addBookToMemoryStorage(Book book){
+        List<Book> allBook = dataSourceConfiguration.getBookManager().getBooks();
+        allBook.add(book);
+        dataSourceConfiguration.getBookManager().setBooks(allBook);
+        return book;
     }
 
     private BookList createFileWithBooks(BookList bookList) {
