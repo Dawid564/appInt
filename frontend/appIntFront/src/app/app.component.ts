@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Book} from "./app/dto/book";
+import {ResponseBook} from "./app/dto/responseBook";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,6 @@ import {Book} from "./app/dto/book";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private book: Book;
   public books: Book[];
   public head = 'yolo';
   public tableHead = [
@@ -24,28 +24,40 @@ export class AppComponent {
   constructor(private httpClient: HttpClient) {
   }
 
-
   ngOnInit() {
-
-  }
-
-
-  public getTestData() {
-    this.httpClient.get("http://localhost:8080/api/book/oneBook").subscribe((data: any[]) => {
-      console.log(data)
-    });
-  }
-
-  public getTestBook() {
-    this.httpClient.get<Book>("http://localhost:8080/api/book/oneBook").subscribe((data: Book) => {
-      this.book = data;
-    });
-    console.log(this.book.id);
   }
 
   public getAllBooks() {
     this.httpClient.get<Book[]>("http://localhost:8080/api/book/allBooks").subscribe((d) => {
       this.books = d;
     });
+  }
+
+  public getAllByTittle(bookTittle) {
+    this.httpClient.get<Book[]>("http://localhost:8080/api/book/searchByTitle/" + bookTittle).subscribe((d) => {
+      this.books = d;
+    });
+  }
+
+  public getAllByAuthor(author) {
+    this.httpClient.get<Book[]>("http://localhost:8080/api/book/searchByAuthor/" + author).subscribe((d) => {
+      this.books = d;
+    });
+  }
+
+  public getAllByISBN(isbn) {
+    this.httpClient.get<Book>("http://localhost:8080/api/book/searchByISBN/" + isbn).subscribe((d) => {
+      this.books = [d];
+    });
+  }
+
+  public addNewBook(book: ResponseBook){
+    this.httpClient.post("http://localhost:8080/api/book/saveBook", book).subscribe((d) => {
+      console.log(d);
+    });
+  }
+
+  public clear(){
+    this.books = [];
   }
 }

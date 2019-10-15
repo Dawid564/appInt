@@ -1,9 +1,18 @@
-<!--<button (click)="getTestData()">test connection</button>-->
-
-<!--<button (click)= "getTestBook()">get dto book</button>-->
 <div>
   <b>Control panel</b>
-  <div><button (click)= "getAllBooks()">get all books</button></div>
+  <div>
+    <button (click)="getAllBooks()">get all books</button>
+    <button (click)="clear()">clear</button>
+  </div>
+  <div>
+    <button (click)="getAllByTittle(bookTitle.value)">get books by tittle</button>
+    <input #bookTitle type="text"></div>
+  <div>
+    <button (click)="getAllByAuthor(bookAuthor.value)">get books by author</button>
+    <input #bookAuthor type="text"></div>
+  <div>
+    <button (click)="getAllByISBN(bookISBN.value)">get books by ISBN</button>
+    <input #bookISBN type="text"></div>
 </div>
 
 
@@ -25,3 +34,19 @@
   </tr>
   </tbody>
 </table>
+
+<form #newBook="ngForm" (ngSubmit) = "addNewBook(newBook.value)" >
+  <input type = "text" name = "title" placeholder = "title" ngModel>
+  <br/>
+  <input type = "text" name = "author" placeholder = "author" ngModel>
+  <br/>
+  <input type = "text" name = "isbn" placeholder = "isbn" ngModel>
+  <br/>
+  <input type = "text" name = "year" placeholder = "year" ngModel>
+  <br/>
+  <input type = "text" name = "publisher" placeholder = "publisher" ngModel>
+  <br/>
+  <input type = "text" name = "pages" placeholder = "pages" ngModel>
+  <br/>
+  <input type = "submit" value = "add new book">
+</form>

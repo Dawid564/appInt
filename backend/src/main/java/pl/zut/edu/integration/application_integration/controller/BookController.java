@@ -1,8 +1,6 @@
 package pl.zut.edu.integration.application_integration.controller;
 
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.web.bind.annotation.*;
 import pl.zut.edu.integration.application_integration.dto.Book;
 import pl.zut.edu.integration.application_integration.service.BookService;
@@ -26,27 +24,22 @@ public class BookController {
         return bookService.getBooks().getBooks().get(0);
     }
 
-    @GetMapping("/test")
-    public String takeTest(){
-        return "test";
-    }
-
-    @GetMapping("/saveBook")
-    public void saveBook(Book book){
+    @PostMapping("/saveBook")
+    public void saveBook(@RequestBody Book book){
         bookService.saveBooks(book);
     }
 
-    @GetMapping("/searchByTitle")
+    @GetMapping("/searchByTitle/{tittle}")
     public List<Book> searchByTitle(@PathVariable String tittle){
         return bookService.searchByTitle(tittle);
     }
 
-    @GetMapping("/searchByAuthor")
+    @GetMapping("/searchByAuthor/{author}")
     public List<Book> searchByAuthor(@PathVariable String author){
         return bookService.searchByAuthor(author);
     }
 
-    @GetMapping("/searchByISBN")
+    @GetMapping("/searchByISBN/{isbn}")
     public Book searchByISBN(@PathVariable String isbn){
         return bookService.searchByISBN(isbn);
     }
