@@ -2,7 +2,9 @@ package pl.zut.edu.integration.application_integration.factories;
 
 import pl.zut.edu.integration.application_integration.dto.Book;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BookManager {
@@ -21,11 +23,23 @@ public class BookManager {
     }
 
     public List<Book> searchByAuthor(String author) {
+        Map<String, List<String>> isbnAndAuthorList = books.stream().filter( b -> b.getAuthors() != null).collect( Collectors.toMap(Book::getIsbn, b -> b.getAuthors().getAuthor()));
+        List<String> isbnResultByAuthor = new ArrayList<>();
+        isbnAndAuthorList.forEach( (isbnKey, authorsList) -> {
+            for(String authors : authorsList){
+                if(authors.contains(author)){
+                    isbnResultByAuthor.add(isbnKey);
+                }
+            }
+        });
+
         return books//
-                .stream()//
-                //.filter(b -> b.getAuthor().equalsIgnoreCase(author))//
+                .stream()
+                .filter( a -> isbnResultByAuthor.contains(a.getIsbn()))
                 .collect(Collectors.toList());
     }
+
+
 
     public Book searchByISBN(String isbn) {
         return books//
