@@ -14,7 +14,7 @@ export class AppComponent {
   public tableHead = [
     'id',
     'title',
-    'author',
+    'authors',
     'isbn',
     'year',
     'publisher',
@@ -30,6 +30,7 @@ export class AppComponent {
   public getAllBooks() {
     this.httpClient.get<Book[]>("http://localhost:8080/api/book/allBooks").subscribe((d) => {
       this.books = d;
+      console.log(d[0].authors);
     });
   }
 

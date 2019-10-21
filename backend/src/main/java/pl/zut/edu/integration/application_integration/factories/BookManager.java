@@ -23,7 +23,7 @@ public class BookManager {
     public List<Book> searchByAuthor(String author) {
         return books//
                 .stream()//
-                .filter(b -> b.getAuthor().equalsIgnoreCase(author))//
+                //.filter(b -> b.getAuthor().equalsIgnoreCase(author))//
                 .collect(Collectors.toList());
     }
 

@@ -1,7 +1,9 @@
+import {Authors} from "./authors";
+
 export interface Book{
   id: string,
   title: string,
-  author: string,
+  authors: Authors,
   isbn: string,
   year: string,
   publisher: string,

@@ -22,8 +22,8 @@ public class Book {
     @XmlElement
     private String title;
 
-    @XmlElement
-    private String author;
+    @XmlElement(name="authors")
+    private Author authors;
 
     @XmlElement
     private String isbn;

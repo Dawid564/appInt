@@ -1,11 +1,9 @@
 package pl.zut.edu.integration.application_integration.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ResourceUtils;
 import pl.zut.edu.integration.application_integration.dto.BookList;
-import pl.zut.edu.integration.application_integration.service.BookService;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
