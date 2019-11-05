@@ -39,7 +39,14 @@ public class BookService {
         return createFileWithBooks(bookList);
     }
 
+    private boolean validateBook(Book book){
+        return book.getTitle() == null || book.getTitle().isEmpty() || book.getAuthors() == null || book.getAuthors().getAuthor().isEmpty();
+    }
+
     public Book addBookToMemoryStorage(Book book){
+        if(validateBook(book)){
+            throw new RuntimeException("tittle or author is empty");
+        }
         List<Book> allBook = dataSourceConfiguration.getBookManager().getBooks();
         allBook.add(book);
         dataSourceConfiguration.getBookManager().setBooks(allBook);

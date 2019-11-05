@@ -25,8 +25,8 @@ public class BookController {
     }
 
     @PostMapping("/saveBook")
-    public void saveBook(@RequestBody Book book){
-        bookService.addBookToMemoryStorage(book);
+    public Book saveBook(@RequestBody Book book){
+        return bookService.addBookToMemoryStorage(book);
     }
 
     @GetMapping("/searchByTitle/{tittle}")
