@@ -40,7 +40,7 @@ public class BookService {
     }
 
     private boolean validateBook(Book book){
-        return book.getTitle() == null || book.getTitle().isEmpty() || book.getAuthors() == null || book.getAuthors().getAuthor().isEmpty();
+        return book.getTitle() == null && book.getTitle().isEmpty() || book.getAuthors() == null && book.getAuthors().getAuthor().isEmpty();
     }
 
     public Book addBookToMemoryStorage(Book book){

@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Book} from "./app/dto/book";
 import {ResponseBook} from "./app/dto/responseBook";
+import {Authors} from "./app/dto/authors";
 
 @Component({
   selector: 'app-root',
@@ -53,9 +54,21 @@ export class AppComponent {
   }
 
   public addNewBook(book: ResponseBook){
-    this.httpClient.post("http://localhost:8080/api/book/saveBook", book).subscribe((d) => {
+    let convertedBook = this.convertAuthorToAuthorsList(book);
+    console.log(convertedBook);
+    this.httpClient.post("http://localhost:8080/api/book/saveBook", convertedBook).subscribe((d) => {
       console.log(d);
     });
+  }
+
+  public convertAuthorToAuthorsList(book: ResponseBook){
+    let bookAuthor = new Array(1);
+    bookAuthor[0] = book.author;
+    let authorsList = new Authors();
+    authorsList.author = bookAuthor;
+    book.authors = authorsList;
+    return book;
+
   }
 
   public clear(){
